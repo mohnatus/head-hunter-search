@@ -28,11 +28,12 @@ export function specializationsReducer(state = initialState, action) {
 				error: ''
 			};
 		case GET_SPECIALIZATIONS_SUCCESS:
+      const selected = state.selected.map(item => item.id);
 			return {
 				...state,
         loading: false,
 				loaded: true,
-				items: action.payload
+				items: action.payload.filter(item => selected.indexOf(item.id) === -1)
 			};
 		case GET_SPECIALIZATIONS_FAIL:
 			return {

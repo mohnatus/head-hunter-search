@@ -17,41 +17,17 @@ export default function Specializations({
 	items,
 	selected,
 	loading,
-	loaded,
 	getItems,
 	onSelect
 }) {
+
 	const selectHandler = (_, value) => {
 		onSelect(value);
 	};
 
-  items.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-
-	const widgetItems = items.reduce((acc, group) => {
-		const titleItem = {
-			id: group.id,
-      name: group.name
-		};
-    const specializations = group.specializations;
-    specializations.sort((a, b) => parseFloat(a.id) - parseFloat(b.id));
-
-		return [...acc, titleItem, ...specializations];
-	}, []);
-
-
-  const groups = items.reduce((acc, group) => {
-    const specializations = group.specializations.map(spec => spec.id);
-    const groupName = `${group.id}. ${group.name}`;
-    return {
-      ...acc,
-      [group.id]: groupName,
-      ...specializations.reduce((acc, specId) => ({ ...acc, [specId]: groupName }), {})
-    }
-  }, {});
-
-	function openHandler() {
-		if (!loaded) getItems();
-	}
+  function inputChangeHandler(_, value) {
+    getItems(value);
+  }
 
 	function getInput(params) {
 		return (
@@ -80,13 +56,13 @@ export default function Specializations({
 			multiple
 			loading={loading}
       loadingText='Загрузка...'
-			onOpen={openHandler}
-			options={widgetItems}
-			groupBy={option => groups[option.id]}
-			getOptionLabel={option => `${option.id}. ${option.name}`}
+      noOptionsText='Ничего не найдено'
+			options={items}
+			getOptionLabel={option => `${option.id}. ${option.text}`}
 			renderInput={getInput}
 			value={selected}
 			onChange={selectHandler}
+      onInputChange={inputChangeHandler}
 		/>
 	);
 }

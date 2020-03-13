@@ -33,8 +33,8 @@ const mapStateToProps = ({ specializations }) => {
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getSpecializations: () => {
-			dispatch(getSpecializations());
+		getSpecializations: (value) => {
+			dispatch(getSpecializations(value));
 		},
 		setSpecializations: specializations => {
 			dispatch(setSpecializations(specializations));
