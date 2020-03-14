@@ -19,10 +19,16 @@ export function getVacancies(filters = {}) {
 			}
 		})
 			.then(response => {
-				console.log(response);
+				dispatch({
+					type: types.GET_VACANCIES_SUCCESS,
+					payload: response.data
+				});
 			})
 			.catch(error => {
-				console.error(error);
+				dispatch({
+					type: types.GET_VACANCIES_FAIL,
+					payload: error
+				});
 			});
 	};
 }

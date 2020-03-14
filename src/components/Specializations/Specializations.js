@@ -62,12 +62,12 @@ export default function Specializations({
 	const groups = {};
 
 	items.forEach(group => {
-		const { id, name: groupName } = group;
-		groups[id] = groupName;
+		const { id: groupId, name: groupName } = group;
+		groups[groupId] = groupName;
 
 		group.specializations.forEach(spec => {
 			const { id } = spec;
-			group[id] = groupName;
+			groups[id] = groupName;
 		});
 	});
 
@@ -80,7 +80,7 @@ export default function Specializations({
 			noOptionsText='Ничего не найдено'
 			options={widgetItems}
 			groupBy={option => groups[option.id]}
-			getOptionLabel={option => `${option.id}. ${option.name}`}
+			getOptionLabel={option => `${option.name}`}
 			renderInput={getInput}
 			value={selected}
 			onChange={selectHandler}
