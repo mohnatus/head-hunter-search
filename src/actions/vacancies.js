@@ -1,4 +1,4 @@
-import * as types from './actionsTypes';
+import * as types from './actionTypes/vacancies';
 import axios from 'axios';
 import qs from 'qs';
 import { vacancies } from '../api/api';

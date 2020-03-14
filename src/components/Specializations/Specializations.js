@@ -4,6 +4,8 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
+import CheckboxGrouppedList from '../CheckboxGrouppedList';
+
 function Specializations({ specializations, getItems, onSelect }) {
 	const {
 		items,
@@ -62,22 +64,37 @@ function Specializations({ specializations, getItems, onSelect }) {
 		});
 	});
 
+	const citems = items.map(group => {
+		const { id, name, specializations } = group;
+		return {
+			id,
+			name,
+			items: specializations.map(spec => {
+				const { id, name } = spec;
+				return { id, name };
+			})
+		}
+	})
+
 	return (
-		<Autocomplete
-			id='select-specializations'
-			multiple
-			loading={loading}
-			loadingText='Загрузка...'
-			noOptionsText='Ничего не найдено'
-			options={widgetItems}
-			groupBy={option => groups[option.id]}
-			getOptionLabel={option => `${option.name}`}
-			renderInput={getInput}
-			value={selected}
-			onChange={selectHandler}
-			onOpen={openHandler}
-		/>
-	);
+	// <React.Fragment>
+	// <Autocomplete
+	// 		id='select-specializations'
+	// 		multiple
+	// 		loading={loading}
+	// 		loadingText='Загрузка...'
+	// 		noOptionsText='Ничего не найдено'
+	// 		options={widgetItems}
+	// 		groupBy={option => groups[option.id]}
+	// 		getOptionLabel={option => `${option.name}`}
+	// 		renderInput={getInput}
+	// 		value={selected}
+	// 		onChange={selectHandler}
+	// 		onOpen={openHandler}
+	// />
+	<CheckboxGrouppedList groups={citems} onChange={data => console.log(data)} />
+	// </React.Fragment>
+);
 }
 
 Specializations.propTypes = {

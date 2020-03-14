@@ -2,7 +2,7 @@ import {
 	GET_VACANCIES_REQUEST,
 	GET_VACANCIES_SUCCESS,
 	GET_VACANCIES_FAIL
-} from '../actions/actionsTypes';
+} from '../actions/actionTypes/vacancies';
 
 const initialState = {
   items: [],

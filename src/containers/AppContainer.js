@@ -6,27 +6,28 @@ import Container from '@material-ui/core/Container';
 
 import Filters from '../components/Filters';
 import Button from '@material-ui/core/Button';
-import VacanciesList from '../components/VacanciesList';
 
-import {
-	getSpecializations,
-	setSpecializations
-} from '../actions/specializations';
-import { getVacancies } from '../actions/search';
+import VacanciesList from '../components/VacanciesList';
+import { getVacancies } from '../actions/vacancies';
+
+import { setKeywords } from '../actions/filters';
 
 function AppContainer(props) {
 	const {
-		specializations, getSpecializations, setSpecializations,
-		vacancies, getVacancies
+		vacancies, getVacancies,
+
+		filters,
+
+		setKeywords
 	} = props;
 
-	const filters = {
-		specializations, getSpecializations, setSpecializations
+	const filtersActions = {
+		setKeywords
 	}
 
 	function updateList(page = 0) {
     getVacancies({
-      specialization: specializations.selected.map((spec) => spec.id),
+			text: filters.keywords,
       page,
     });
   }
@@ -44,7 +45,7 @@ function AppContainer(props) {
 			<CssBaseline />
 			<Container maxWidth="lg">
 				<div style={{ padding: 20 }}>
-					<Filters {...filters} />
+					<Filters {...filters} {...filtersActions} />
 					<div>
 						<Button onClick={searchButtonClickHandler}>Искать вакансии</Button>
 					</div>
@@ -57,10 +58,11 @@ function AppContainer(props) {
 	);
 }
 
-const mapStateIntoProps = ({ specializations, vacancies }) => {
+const mapStateIntoProps = ({ vacancies, filters }) => {
   return {
-    specializations: specializations,
-    vacancies: vacancies,
+		vacancies,
+
+		filters
   };
 };
 
@@ -69,11 +71,9 @@ const mapDispatchIntoProps = (dispatch) => {
     getVacancies: (params) => {
       dispatch(getVacancies(params));
 		},
-		getSpecializations: () => {
-			dispatch(getSpecializations());
-		},
-		setSpecializations: specializations => {
-			dispatch(setSpecializations(specializations));
+
+		setKeywords: (keywords) => {
+			dispatch(setKeywords(keywords))
 		}
   };
 };

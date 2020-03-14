@@ -2,14 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 
-function Vacancy({ id }) {
+function Vacancy({ id, name }) {
 
   return (
     <div>
 
-        { id }
-
-
+        { name }
 
     </div>
   );
