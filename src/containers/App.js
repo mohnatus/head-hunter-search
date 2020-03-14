@@ -5,10 +5,14 @@ import {
 	setSpecializations
 } from '../actions/specializations';
 import Specializations from '../components/Specializations';
+import Search from '../containers/Search';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
+import axios from 'axios'
+
 function App({ specializations, getSpecializations, setSpecializations }) {
+  window.axios = axios;
 	return (
 		<div className='app'>
 			<CssBaseline />
@@ -20,6 +24,7 @@ function App({ specializations, getSpecializations, setSpecializations }) {
 					label='Выбрать специализацию'
           placeholder='Специализация'
 				></Specializations>
+        <Search />
 			</Container>
 		</div>
 	);

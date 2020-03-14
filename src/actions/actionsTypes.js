@@ -1,8 +1,15 @@
 // запрос на загрузку списка специализаций
-export const GET_SPECIALIZATIONS_REQUEST = 'vacancies/get_specializations.request';
+export const GET_SPECIALIZATIONS_REQUEST = 'specializations/get.request';
 // успешная загрузка списка специализаций
-export const GET_SPECIALIZATIONS_SUCCESS = 'vacancies/get_specializations.success';
+export const GET_SPECIALIZATIONS_SUCCESS = 'specializations/get.success';
 // ошибка при загрузке списка специализаций
-export const GET_SPECIALIZATIONS_FAIL = 'vacancies/get_specializations.fail';
+export const GET_SPECIALIZATIONS_FAIL = 'specializations/get.fail';
 // выбор специализаций
-export const SET_SPECIALIZATIONS = 'vacancies/set_specializations';
+export const SET_SPECIALIZATIONS = 'specializations/set';
+
+// запрос на получение вакансий
+export const GET_VACANCIES_REQUEST = 'vacancies/get.request';
+// успешная загрузка списка вакансий
+export const GET_VACANCIES_SUCCESS = 'vacancies/get.success';
+// ошибка при загрузке списка вакансий
+export const GET_VACANCIES_FAIL = 'vacancies/get.fail';

@@ -1,30 +1,22 @@
 import * as types from './actionsTypes';
 import axios from 'axios';
-import { specializationsSuggest } from '../api/api';
+import { specializations } from '../api/api';
 
 /**
  * Получение списка специализаций
  */
-export function getSpecializations(value) {
-	return (dispatch, ...other) => {
-		if (value.length < 2) {
-			dispatch({
-				type: types.GET_SPECIALIZATIONS_SUCCESS,
-				payload: []
-			});
-			return;
-		}
-
+export function getSpecializations() {
+	return (dispatch) => {
 		dispatch({
 			type: types.GET_SPECIALIZATIONS_REQUEST
 		});
 
 		axios
-			.get(specializationsSuggest + '?locale=RU&text=' + value)
+			.get(specializations)
 			.then(response => {
 				dispatch({
 					type: types.GET_SPECIALIZATIONS_SUCCESS,
-					payload: response.data.items
+					payload: response.data
 				});
 			})
 			.catch(error => {

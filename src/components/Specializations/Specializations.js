@@ -17,17 +17,19 @@ export default function Specializations({
 	items,
 	selected,
 	loading,
+	loaded,
 	getItems,
 	onSelect
 }) {
-
 	const selectHandler = (_, value) => {
 		onSelect(value);
 	};
 
-  function inputChangeHandler(_, value) {
-    getItems(value);
-  }
+	function openHandler() {
+		if (!loaded) {
+			getItems();
+		}
+	}
 
 	function getInput(params) {
 		return (
@@ -50,19 +52,39 @@ export default function Specializations({
 		);
 	}
 
+	const widgetItems = items.reduce((acc, group) => {
+		const { id, name, specializations } = group;
+		const groupItem = { id, name };
+		specializations.sort((a, b) => (a.name < b.name ? -1 : 1));
+		return [...acc, groupItem, ...specializations];
+	}, []);
+
+	const groups = {};
+
+	items.forEach(group => {
+		const { id, name: groupName } = group;
+		groups[id] = groupName;
+
+		group.specializations.forEach(spec => {
+			const { id } = spec;
+			group[id] = groupName;
+		});
+	});
+
 	return (
 		<Autocomplete
 			id='select-specializations'
 			multiple
 			loading={loading}
-      loadingText='Загрузка...'
-      noOptionsText='Ничего не найдено'
-			options={items}
-			getOptionLabel={option => `${option.id}. ${option.text}`}
+			loadingText='Загрузка...'
+			noOptionsText='Ничего не найдено'
+			options={widgetItems}
+			groupBy={option => groups[option.id]}
+			getOptionLabel={option => `${option.id}. ${option.name}`}
 			renderInput={getInput}
 			value={selected}
 			onChange={selectHandler}
-      onInputChange={inputChangeHandler}
+			onOpen={openHandler}
 		/>
 	);
 }
