@@ -4,23 +4,14 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-Specializations.propTypes = {
-	items: PropTypes.array.isRequired,
-	selected: PropTypes.array.isRequired,
-	loading: PropTypes.bool.isRequired,
-	loaded: PropTypes.bool.isRequired,
-	getItems: PropTypes.func.isRequired,
-	onSelect: PropTypes.func.isRequired
-};
+function Specializations({ specializations, getItems, onSelect }) {
+	const {
+		items,
+		selected,
+		loading,
+		loaded
+	} = specializations;
 
-export default function Specializations({
-	items,
-	selected,
-	loading,
-	loaded,
-	getItems,
-	onSelect
-}) {
 	const selectHandler = (_, value) => {
 		onSelect(value);
 	};
@@ -88,3 +79,17 @@ export default function Specializations({
 		/>
 	);
 }
+
+Specializations.propTypes = {
+	specializations: PropTypes.shape({
+		items: PropTypes.array.isRequired,
+		selected: PropTypes.array.isRequired,
+		loaded: PropTypes.bool.isRequired,
+		loading: PropTypes.bool.isRequired,
+	}).isRequired,
+
+	getItems: PropTypes.func.isRequired,
+	onSelect: PropTypes.func.isRequired
+};
+
+export default Specializations;

@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-const Vacancy = ({ id }) => {
+function Vacancy({ id }) {
 
   return (
     <div>
@@ -13,5 +14,9 @@ const Vacancy = ({ id }) => {
     </div>
   );
 };
+
+Vacancy.propTypes = {
+  id: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+}
 
 export default Vacancy;
