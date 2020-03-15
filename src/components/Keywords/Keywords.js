@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Link from '@material-ui/core/Link';
 
 import { getSuggests } from './getSuggests';
 
@@ -20,6 +21,7 @@ function Keywords({ keywords, onChange }) {
   }
 
   return (
+    <>
     <Autocomplete
       id='vacancy-keywords'
       freeSolo
@@ -36,6 +38,10 @@ function Keywords({ keywords, onChange }) {
       )}
       onInputChange={inputChangeHandler}
     />
+    <div>
+      <Link color="primary" underline="always" href="https://hh.ru/article/1175" target="_blank" rel="noopener noreferrer">Описание языка поисковых запросов</Link>
+    </div>
+    </>
   );
 }
 

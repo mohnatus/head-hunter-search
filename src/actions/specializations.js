@@ -30,13 +30,4 @@ export function getSpecializations() {
 	};
 }
 
-/**
- * Выбор специализаций
- * @param {Object[]} specializations
- */
-export function setSpecializations(specializations) {
-	return {
-		type: types.SET_SPECIALIZATIONS,
-		payload: specializations
-	};
-}
+

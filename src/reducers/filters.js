@@ -1,15 +1,21 @@
-import { SET_KEYWORDS } from '../actions/actionTypes/filters'
+import { SET_TEXT, SET_SPECIALIZATION } from '../actions/actionTypes/filters'
 
 const initialState = {
-  keywords: ''
+  text: '',
+  specialization: []
 }
 
 export function filtersReducer(state = initialState, action) {
   switch(action.type) {
-    case SET_KEYWORDS:
+    case SET_TEXT:
       return {
         ...state,
-        keywords: action.payload
+        text: action.payload
+      }
+    case SET_SPECIALIZATION:
+      return {
+        ...state,
+        specialization: action.payload
       }
     default:
       return state;

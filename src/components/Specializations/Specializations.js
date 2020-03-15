@@ -77,23 +77,13 @@ function Specializations({ specializations, getItems, onSelect }) {
 	})
 
 	return (
-	// <React.Fragment>
-	// <Autocomplete
-	// 		id='select-specializations'
-	// 		multiple
-	// 		loading={loading}
-	// 		loadingText='Загрузка...'
-	// 		noOptionsText='Ничего не найдено'
-	// 		options={widgetItems}
-	// 		groupBy={option => groups[option.id]}
-	// 		getOptionLabel={option => `${option.name}`}
-	// 		renderInput={getInput}
-	// 		value={selected}
-	// 		onChange={selectHandler}
-	// 		onOpen={openHandler}
-	// />
+		<>
+		
+		<Button variant="outlined" color="primary" onClick={handleClickOpen}>
+        Выбрать специализацию
+      </Button>
 	<CheckboxGrouppedList groups={citems} onChange={data => console.log(data)} />
-	// </React.Fragment>
+		</>
 );
 }
 

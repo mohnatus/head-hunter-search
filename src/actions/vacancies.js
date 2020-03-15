@@ -6,14 +6,17 @@ import { vacancies } from '../api/api';
 /**
  * Получение списка вакансий
  */
-export function getVacancies(filters = {}) {
+export function getVacancies(filters = {}, page = 0) {
 	return dispatch => {
 		dispatch({
 			type: types.GET_VACANCIES_REQUEST
 		});
 
 		axios(vacancies, {
-			params: filters,
+			params: {
+				...filters,
+				page
+			},
 			paramsSerializer: params => {
 				return qs.stringify(params, { arrayFormat: 'repeat' });
 			}
