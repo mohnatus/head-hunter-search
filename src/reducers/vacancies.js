@@ -6,7 +6,8 @@ import {
 
 const initialState = {
   items: [],
-  touched: false,
+	touched: false,
+	found: 0,
   pages: 0,
   page: 0,
   loading: false,
@@ -27,13 +28,14 @@ export function vacanciesReducer(state = initialState, action) {
 				error: ''
 			};
 		case GET_VACANCIES_SUCCESS:
-      const { items, page, pages } = action.payload;
+      const { items, page, pages, found } = action.payload;
 			return {
 				...state,
         loading: false,
         items,
         page,
-        pages,
+				pages,
+				found,
         touched: true
 			};
 		case GET_VACANCIES_FAIL:

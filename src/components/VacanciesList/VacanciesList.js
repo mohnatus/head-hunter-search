@@ -3,6 +3,14 @@ import PropTypes from 'prop-types';
 
 import Vacancy from '../Vacancy';
 
+VacanciesList.propTypes = {
+  vacancies: PropTypes.shape({
+    loading: PropTypes.bool.isRequired,
+    touched: PropTypes.bool.isRequired,
+    items: PropTypes.array.isRequired,
+  })
+};
+
 function VacanciesList({ vacancies }) {
   const { loading, touched, items } = vacancies;
 
@@ -21,8 +29,6 @@ function VacanciesList({ vacancies }) {
   );
 }
 
-VacanciesList.propTypes = {
 
-};
 
 export default VacanciesList;
