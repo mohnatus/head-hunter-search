@@ -1,27 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { getSpecialization } from '../actions/specializations';
+import Specializations from '../components/Specializations';
 
-function SpecializationsContainer({ specializations, selected, onChange }) {
+import { getSpecializations } from '../actions/specializations';
+
+
+function SpecializationsContainer(props) {
   return (
-    <div></div>
+    <Specializations {...props} />
   )
 }
 
 const mapStateIntoProps = ({ specializations }) => {
   return {
-    specializations
+    ...specializations,
   };
 };
 
 const mapDispatchIntoProps = (dispatch) => {
   return {
-    getSpecialization: () => {
-      dispatch(getSpecialization());
+    getSpecializations: () => {
+      dispatch(getSpecializations());
     },
   };
 };
+
 
 export default connect(
   mapStateIntoProps,

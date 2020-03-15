@@ -1,24 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import VacanciesList from '../components/VacanciesList';
 
-import Vacancy from '../components/Vacancy';
 
-function VacanciesContainer({ vacancies }) {
-  const { loading, touched, items } = vacancies;
 
-  if (loading) return <div>Loading...</div>;
-
-  if (!touched) return null;
-
-  if (!items.length) return <div>Nothing found...</div>;
-
+function VacanciesContainer(props) {
   return (
-    <div>
-      {items.map((vacancy) => {
-        return <Vacancy {...vacancy} key={vacancy.id} />;
-      })}
-    </div>
-  );
+    <VacanciesList {...props} />
+  )
 }
 
 const mapStateIntoProps = ({ vacancies }) => {

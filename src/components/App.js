@@ -3,7 +3,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Container from '@material-ui/core/Container';
 
-import FilterContainer from '../containers/FilterContainer';
+import FiltersContainer from '../containers/FiltersContainer';
 import Feed from './Feed';
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
       <CssBaseline />
       <Container maxWidth='lg'>
         <div style={{ padding: 20 }}>
-          <FilterContainer />
+          <FiltersContainer />
         </div>
         <div style={{ padding: 20 }}>
           <Feed />

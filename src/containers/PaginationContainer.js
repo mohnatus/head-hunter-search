@@ -1,26 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import Pagination from '@material-ui/lab/Pagination';
-
 import { getVacancies } from '../actions/vacancies';
+import VacanciesPagination from '../components/VacanciesPagination';
 
-function PaginationContainer({ filters, found, pages, page, getVacancies }) {
-  if (!found) return null;
-
-  const pageChangeHandler = (_, page) => {
-    getVacancies(filters, page);
-  };
-
-  return (
-    <Pagination
-      count={pages}
-      page={page}
-      onChange={pageChangeHandler}
-      color={'primary'}
-      shape={'rounded'}
-    />
-  );
+function PaginationContainer(props) {
+  return <VacanciesPagination {...props} />;
 }
 
 const mapStateIntoProps = ({ filters, vacancies }) => {
@@ -29,7 +14,7 @@ const mapStateIntoProps = ({ filters, vacancies }) => {
     filters,
     pages,
     page,
-    found
+    found,
   };
 };
 

@@ -1,102 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import TextField from '@material-ui/core/TextField';
-import CircularProgress from '@material-ui/core/CircularProgress';
 
-import CheckboxGrouppedList from '../CheckboxGrouppedList';
+import Button from '@material-ui/core/Button';
+import SpecializationsDialog from '../SpecializationsDialog';
 
-function Specializations({ specializations, getItems, onSelect }) {
-	const {
-		items,
-		selected,
-		loading,
-		loaded
-	} = specializations;
+function Specializations({
+  items, loading, error,
+  selected,
+  onChange,
+  getSpecializations,
+}) {
+  const [isOpen, setIsOpen] = useState(false);
 
-	const selectHandler = (_, value) => {
-		onSelect(value);
-	};
+  function clickHandler() {
+    if (!items.length && !loading && !error) getSpecializations();
+    setIsOpen(true);
+  }
 
-	function openHandler() {
-		if (!loaded) {
-			getItems();
-		}
-	}
+  function closeHandler() {
+    setIsOpen(false);
+  }
 
-	function getInput(params) {
-		return (
-			<TextField
-				{...params}
-				label='Выбрать специализации'
-				variant='standard'
-				InputProps={{
-					...params.InputProps,
-					endAdornment: (
-						<React.Fragment>
-							{loading ? (
-								<CircularProgress color='inherit' size={20} />
-							) : null}
-							{params.InputProps.endAdornment}
-						</React.Fragment>
-					)
-				}}
-			/>
-		);
-	}
-
-	const widgetItems = items.reduce((acc, group) => {
-		const { id, name, specializations } = group;
-		const groupItem = { id, name };
-		specializations.sort((a, b) => (a.name < b.name ? -1 : 1));
-		return [...acc, groupItem, ...specializations];
-	}, []);
-
-	const groups = {};
-
-	items.forEach(group => {
-		const { id: groupId, name: groupName } = group;
-		groups[groupId] = groupName;
-
-		group.specializations.forEach(spec => {
-			const { id } = spec;
-			groups[id] = groupName;
-		});
-	});
-
-	const citems = items.map(group => {
-		const { id, name, specializations } = group;
-		return {
-			id,
-			name,
-			items: specializations.map(spec => {
-				const { id, name } = spec;
-				return { id, name };
-			})
-		}
-	})
-
-	return (
-		<>
-		
-		<Button variant="outlined" color="primary" onClick={handleClickOpen}>
+  return (
+    <div>
+      <div></div>
+      <Button color='primary' variant='text' onClick={clickHandler}>
         Выбрать специализацию
       </Button>
-	<CheckboxGrouppedList groups={citems} onChange={data => console.log(data)} />
-		</>
-);
+
+      {isOpen ? (
+        <SpecializationsDialog items={items} selected={selected} loading={loading} error={error} onClose={closeHandler} onChange={onChange} />
+      ) : null}
+    </div>
+  );
 }
 
 Specializations.propTypes = {
-	specializations: PropTypes.shape({
-		items: PropTypes.array.isRequired,
-		selected: PropTypes.array.isRequired,
-		loaded: PropTypes.bool.isRequired,
-		loading: PropTypes.bool.isRequired,
-	}).isRequired,
+  items: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
 
-	getItems: PropTypes.func.isRequired,
-	onSelect: PropTypes.func.isRequired
+  selected: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onChange: PropTypes.func.isRequired,
+  getSpecializations: PropTypes.func.isRequired,
 };
 
 export default Specializations;
