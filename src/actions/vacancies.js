@@ -12,9 +12,10 @@ export function getVacancies(filters = {}) {
       type: types.GET_VACANCIES_REQUEST,
     });
 
-    const params = {};
-    Object.keys(filters).forEach((key) => {
-      if (filters[key] !== null) params[key] = filters[key];
+    const params = { ...filters };
+    const notNullParams = ['salary'];
+    notNullParams.forEach((key) => {
+      if (!params[key]) delete params[key];
     });
 
     axios(vacancies, {

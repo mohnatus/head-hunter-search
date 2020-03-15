@@ -1,11 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Vacancy({ id, name, alternate_url }) {
+function getSalary(salary) {
+  return `${salary.from ? 'от ' + salary.from : ''} ${
+    salary.to ? 'до ' + salary.to : ''
+  } ${salary.currency}`;
+}
+
+function Vacancy(vacancy) {
+  const { name, alternate_url, salary, area } = vacancy;
+
   return (
-    <div>
-      <a href={alternate_url} target='_blank' rel="noopener noreferrer">
+    <div style={{ marginBottom: 20 }}>
+      <a href={alternate_url} target='_blank' rel='noopener noreferrer'>
         {name}
+        <br />
+        <strong>{salary ? getSalary(salary) : 'Зарплата не указана'}</strong>
       </a>
     </div>
   );

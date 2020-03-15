@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Keywords from '../Keywords';
+import Salary from '../Salary';
 import Button from '@material-ui/core/Button';
 
 import SpecializationsContainer from '../../containers/SpecializationsContainer';
@@ -13,10 +14,13 @@ Filters.propTypes = {
   }).isRequired,
   setText: PropTypes.func.isRequired,
   setSpecialization: PropTypes.func.isRequired,
+  setSalary: PropTypes.func.isRequired,
+  setCurrency: PropTypes.func.isRequired,
+  setOnlyWithSalary: PropTypes.func.isRequired,
   getVacancies: PropTypes.func.isRequired,
 }
 
-function Filters({ filters, setText, setSpecialization, getVacancies }) {
+function Filters({ filters, setText, setSpecialization, setSalary, setCurrency, setOnlyWithSalary, getVacancies }) {
 
   function applyFilters() {
     getVacancies(filters);
@@ -26,6 +30,7 @@ function Filters({ filters, setText, setSpecialization, getVacancies }) {
     <div>
       <Keywords keywords={filters.text} onChange={setText} />
       <hr />
+      <Salary salary={filters.salary} currency={filters.currency} onlyWithSalary={filters.onlyWithSalary} setSalary={setSalary} setCurrency={setCurrency} setOnlyWithSalary={setOnlyWithSalary} />
       <SpecializationsContainer
         selected={filters.specialization}
         onChange={setSpecialization}

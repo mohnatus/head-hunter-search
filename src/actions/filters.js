@@ -1,4 +1,4 @@
-import { SET_TEXT, SET_SPECIALIZATION, SET_SALARY, SET_CURRENCY } from './actionTypes/filters';
+import { SET_TEXT, SET_SPECIALIZATION, SET_SALARY, SET_CURRENCY, SET_ONLY_WITH_SALARY } from './actionTypes/filters';
 
 export function setText(text = []) {
   return {
@@ -18,6 +18,13 @@ export function setSalary(salary) {
   return {
     type: SET_SALARY,
     payload: salary,
+  };
+}
+
+export function setOnlyWithSalary(onlyWithSalary) {
+  return {
+    type: SET_ONLY_WITH_SALARY,
+    payload: onlyWithSalary,
   };
 }
 

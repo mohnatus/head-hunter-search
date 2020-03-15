@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Filters from '../components/Filters';
 
-import { setText, setSpecialization } from '../actions/filters';
+import { setText, setSpecialization, setSalary, setCurrency, setOnlyWithSalary } from '../actions/filters';
 import { getVacancies } from '../actions/vacancies';
 
 function FiltersContainer(props) {
@@ -22,6 +22,18 @@ const mapDispatchIntoProps = (dispatch) => {
   return {
     setText: (keywords) => {
       dispatch(setText(keywords));
+    },
+
+    setSalary: (salary) => {
+      dispatch(setSalary(salary));
+    },
+
+    setOnlyWithSalary: (salary) => {
+      dispatch(setOnlyWithSalary(salary));
+    },
+
+    setCurrency: (currency) => {
+      dispatch(setCurrency(currency));
     },
 
     setSpecialization: (specializations) => {
