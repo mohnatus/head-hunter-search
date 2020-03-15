@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
+import { defaultConfig } from './defaultConfig';
 import CheckboxTreeWidget from 'react-checkbox-tree';
-import SvgIcon from '@material-ui/core/SvgIcon';
 
 import ArrowDown from '@material-ui/icons/KeyboardArrowDown';
 import ArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -11,19 +11,13 @@ import CheckboxOutlineBlank from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckboxOutlinedTwoTone from '@material-ui/icons/CheckBoxOutlineBlankTwoTone';
 
 CheckboxTree.propTypes = {
-
+  items: PropTypes.array.isRequired,
+  checked: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number, PropTypes.string])),
+  config: PropTypes.any,
+  onChange: PropTypes.func.isRequired,
 };
 
-const defaultConfig = {
-  getValue: (item) => item.value,
-  getLabel: item => item.label,
-
-  getChildren: item => item.children,
-  sort: null,
-}
-
 function CheckboxTree({ items, checked = [], config = {}, onChange }) {
-  console.log('tree checked', checked)
   const settings = {
     ...defaultConfig,
     ...config,
@@ -54,17 +48,7 @@ function CheckboxTree({ items, checked = [], config = {}, onChange }) {
   }
 
   const nodes = renameLvl([...items]);
-
-  console.log(2, nodes)
-
   const [ expanded, setExpanded ] = useState([]);
-
-  function expandHandler(p) {
-    console.log('exp', p)
-    setExpanded(p)
-  }
-
-  console.log('checked', checked)
 
   return (
     <CheckboxTreeWidget

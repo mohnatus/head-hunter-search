@@ -6,7 +6,18 @@ import Button from '@material-ui/core/Button';
 
 import SpecializationsContainer from '../../containers/SpecializationsContainer';
 
+Filters.propTypes = {
+  filters: PropTypes.shape({
+    text: PropTypes.string,
+    specialization: PropTypes.arrayOf(PropTypes.string)
+  }).isRequired,
+  setText: PropTypes.func.isRequired,
+  setSpecialization: PropTypes.func.isRequired,
+  getVacancies: PropTypes.func.isRequired,
+}
+
 function Filters({ filters, setText, setSpecialization, getVacancies }) {
+
   function applyFilters() {
     getVacancies(filters);
   }

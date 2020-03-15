@@ -7,6 +7,11 @@ import Link from '@material-ui/core/Link';
 
 import { getSuggests } from './getSuggests';
 
+Keywords.propTypes = {
+  keywords: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
 function Keywords({ keywords, onChange }) {
   const [suggests, setSuggests] = useState([]);
 
@@ -22,32 +27,35 @@ function Keywords({ keywords, onChange }) {
 
   return (
     <>
-    <Autocomplete
-      id='vacancy-keywords'
-      freeSolo
-      inputValue={keywords}
-      options={suggests}
-      getOptionLabel={(option) => option.text}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          label='Ключевые слова'
-          margin='normal'
-          variant='outlined'
-        />
-      )}
-      onInputChange={inputChangeHandler}
-    />
-    <div>
-      <Link color="primary" underline="always" href="https://hh.ru/article/1175" target="_blank" rel="noopener noreferrer">Описание языка поисковых запросов</Link>
-    </div>
+      <Autocomplete
+        id='vacancy-keywords'
+        freeSolo
+        inputValue={keywords}
+        options={suggests}
+        getOptionLabel={(option) => option.text}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label='Ключевые слова'
+            margin='normal'
+            variant='outlined'
+          />
+        )}
+        onInputChange={inputChangeHandler}
+      />
+      <div>
+        <Link
+          color='primary'
+          underline='always'
+          href='https://hh.ru/article/1175'
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          Описание языка поисковых запросов
+        </Link>
+      </div>
     </>
   );
 }
-
-Keywords.propTypes = {
-  keywords: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-};
 
 export default Keywords;
